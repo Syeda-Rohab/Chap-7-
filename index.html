@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ur-Latn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leaving the Laptop - Explanation</title>
+<style>
+  * { box-sizing: border-box; }
+  html { font-size: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f4f6f9;
+    color: #1a1a2e;
+    margin: 0;
+    padding: 0;
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  .container { max-width: 780px; margin: 0 auto; padding: 32px 20px 60px; }
+  header {
+    text-align: center;
+    padding: 28px 20px;
+    background: linear-gradient(135deg, #0f4c81, #2a6f97);
+    color: white;
+    border-radius: 12px;
+    margin-bottom: 30px;
+  }
+  header h1 { margin: 0 0 8px; font-size: 1.5em; }
+  header p { margin: 0; opacity: 0.9; font-style: italic; font-size: 0.95em; }
+  h2 {
+    color: #0f4c81;
+    border-bottom: 2px solid #d6e4ef;
+    padding-bottom: 8px;
+    margin-top: 40px;
+    font-size: 1.25em;
+  }
+  .para-block {
+    background: white;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 14px 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    border-left: 4px solid #2a6f97;
+  }
+  .para-label { color: #c1121f; font-weight: 700; font-size: 0.9em; margin-bottom: 6px; display: block; }
+  .para-text { margin: 0; font-size: 1em; color: #222; }
+  .diagram-box {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    margin: 18px 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    border: 1px solid #e0e6ed;
+  }
+  .diagram-box svg { width: 100%; height: auto; display: block; }
+  .diagram-caption { text-align: center; font-size: 0.85em; color: #666; margin-top: 10px; font-style: italic; }
+  .summary-box {
+    background: #eef5fb;
+    border: 1px solid #cfe1ef;
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-top: 20px;
+  }
+  .summary-box ul { padding-left: 20px; margin: 0; }
+  .summary-box li { margin-bottom: 10px; }
+  footer { text-align: center; font-size: 0.8em; color: #888; margin-top: 40px; }
+  footer a { color: #2a6f97; }
+
+  .quiz-intro {
+    background: #fff8e6;
+    border: 1px solid #f0dca0;
+    border-radius: 10px;
+    padding: 14px 18px;
+    color: #6b5200;
+    font-size: 0.95em;
+  }
+  .quiz-question {
+    background: white;
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin: 16px 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    border-left: 4px solid #c1121f;
+  }
+  .quiz-q-text { margin: 0 0 12px; font-size: 1em; color: #1a1a2e; }
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-option {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px; border: 1px solid #ddd; border-radius: 8px;
+    cursor: pointer; transition: background 0.15s, border-color 0.15s; font-size: 0.95em;
+  }
+  .quiz-option:hover { background: #f2f7fc; border-color: #2a6f97; }
+  .quiz-option input { accent-color: #0f4c81; width: 16px; height: 16px; flex-shrink: 0; }
+  .quiz-option.correct-answer { background: #e6f7ea; border-color: #2e7d32; font-weight: 600; }
+  .quiz-option.wrong-answer { background: #fdeaea; border-color: #c62828; }
+  .quiz-explain { margin-top: 12px; padding: 10px 14px; background: #eef5fb; border-radius: 8px; font-size: 0.9em; color: #333; }
+  .quiz-actions { text-align: center; margin: 30px 0 10px; }
+  .btn-primary, .btn-secondary {
+    padding: 12px 28px; font-size: 1em; border: none; border-radius: 8px;
+    cursor: pointer; font-weight: 600; margin: 0 6px;
+  }
+  .btn-primary { background: #0f4c81; color: white; }
+  .btn-primary:hover { background: #0c3c67; }
+  .btn-secondary { background: #e0e0e0; color: #333; }
+  .btn-secondary:hover { background: #ccc; }
+  .score-banner {
+    text-align: center; font-size: 1.15em; font-weight: 700;
+    padding: 16px 20px; border-radius: 10px; margin: 20px 0;
+  }
+  .score-banner.pass { background: #e6f7ea; color: #2e7d32; border: 1px solid #2e7d32; }
+  .score-banner.fail { background: #fdeaea; color: #c62828; border: 1px solid #c62828; }
+
+  @media (max-width: 600px) {
+    .container { padding: 16px 12px 40px; }
+    header { padding: 20px 14px; border-radius: 10px; margin-bottom: 20px; }
+    header h1 { font-size: 1.3em; line-height: 1.4; }
+    header p { font-size: 0.95em; }
+    h2 { font-size: 1.15em; margin-top: 28px; padding-bottom: 6px; }
+    .para-block { padding: 14px 16px; margin: 10px 0; border-radius: 8px; }
+    .para-label { font-size: 0.95em; }
+    .para-text { font-size: 1em; line-height: 1.65; }
+    .diagram-box { padding: 10px; border-radius: 10px; }
+    .diagram-caption { font-size: 0.8em; }
+    .summary-box { padding: 16px 18px; border-radius: 10px; }
+    .summary-box li { font-size: 1em; }
+    .quiz-intro { padding: 14px 16px; font-size: 0.98em; }
+    .quiz-question { padding: 16px 16px; margin: 12px 0; border-radius: 8px; }
+    .quiz-q-text { font-size: 1em; }
+    .quiz-option { padding: 12px 12px; font-size: 0.98em; gap: 8px; }
+    .quiz-explain { font-size: 0.95em; padding: 12px 14px; }
+    .quiz-actions { display: flex; flex-direction: column; gap: 10px; margin: 24px 0 10px; }
+    .btn-primary, .btn-secondary { width: 100%; margin: 0; padding: 14px 20px; font-size: 1em; }
+    .score-banner { font-size: 1.05em; padding: 14px 16px; }
+    footer { font-size: 0.85em; padding: 0 10px; }
+  }
+  @media (max-width: 380px) {
+    header h1 { font-size: 1.15em; }
+    .quiz-q-text strong { display: block; margin-bottom: 4px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>Leaving the Laptop: A Runtime Crash Course</h1>
+  <p>Chapter Explanation — Roman Urdu (Bohat Aasan Version)</p>
+</header>
+
+<h2>Shuruaat</h2>
+
+<div class="para-block"><span class="para-label">Intro:</span><p class="para-text">Aapne ek acha loop banaya — subah khud chalta hai, harness khatarnak kaamon ko rokta hai, eval suite number deta hai jise defend kar sakte hain. Sab kuch sahi kiya, lekin sab kuch rukta hai jese hi aap laptop band karte hain, WiFi chala jata hai, ya flight mein baithte hain. Aapke sabse bharosemand worker ka ek hi masla bacha hai: wo machine jo aapki desk par hai. Ye chapter sikhata hai: aapka loop kahan rahe, aur usay zinda kaun rakhe — ye "runtime decision" hai.</p></div>
+
+<div class="para-block"><span class="para-label">Zaroori Alfaz:</span><p class="para-text">Runtime = wo computer aur software jo aapke agent ko chalata hai. Home = runtime ka choice: session, cloud schedule, managed runtime, apna process. Control plane = loop ka wo hissa jo chalata hai. Execution plane = jahan asal kaam hota hai. Custody = kiske paas data hota hai. Headless = agent ko sirf command se chalana. Managed runtime = ek service jahan aap definition bhejte hain, wo isay chalate hain. Portability = kitna hissa nayi jagah bina rebuild kiye chal jata hai. Lock-in = kisi jagah se nikalne ka kharcha. Blast radius = agar bura raat ho to kitna nuksaan. Pager = wo alarm jo raat ko engineer ko jagata hai.</p></div>
+
+<h2>Part 1: Aakhri Masla</h2>
+
+<div class="para-block"><span class="para-label">Concept 1 (Laptop par proven loop ek bura rakha hua khazana hai):</span><p class="para-text">Aapne 3 courses mein jo banaya usay gino: ek loop jo triage karta hai, ek harness jo khatarnak galtiyan naa-mumkin banati hai, aur ek eval suite jo defend karne layak number deta hai — ye lagbhag ek junior colleague jaisa hai. Ab dekho kis par ye depend karta hai: laptop khula ho, session login ho, machine subah 9 baje jaagi ho, power aur internet ho. Koi ek miss ho to beat chup chaap nahi chalti. Aasan misaal: aapne ek acha worker train kiya, lekin sirf apne living room mein, sirf jab aap ghar par ho, kaam karne ki condition rakh di. Worker theek hai, arrangement masla hai.</p></div>
+
+<div class="para-block"><span class="para-label">Concept 2 (Ek sawal jo sab kuch sort kar deta hai):</span><p class="para-text">"Loop kaun operate karta hai, aur kaam kahan execute hota hai?" 2 hisse: Control plane (loop khud) aur Execution plane (jahan kaam hota hai). Laptop par ye dono ek hi machine hain, is liye aapko farak kabhi nahi dikha.</p></div>
+
+<div class="diagram-box">
+<svg width="100%" viewBox="0 0 680 260" role="img">
+<title>Four homes for a proven loop diagram</title>
+<desc>Four runtime homes for a proven loop: your session, cloud schedule, managed runtime, and your own process, each owning a different amount.</desc>
+<rect x="10" y="30" width="155" height="130" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text x="87" y="55" text-anchor="middle" font-size="13" font-weight="600" fill="#2C2C2A">1. Aapki session</text>
+<text x="87" y="78" text-anchor="middle" font-size="11" fill="#444441">Laptop, lid band</text>
+<text x="87" y="94" text-anchor="middle" font-size="11" fill="#444441">= loop band</text>
+<text x="87" y="120" text-anchor="middle" font-size="10" fill="#7A2415">Sab kuch aapka</text>
+<rect x="175" y="30" width="155" height="130" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="252" y="55" text-anchor="middle" font-size="13" font-weight="600" fill="#04342C">2. Cloud schedule</text>
+<text x="252" y="78" text-anchor="middle" font-size="11" fill="#085041">Routine / Actions</text>
+<text x="252" y="94" text-anchor="middle" font-size="11" fill="#085041">sirf clock badla</text>
+<text x="252" y="120" text-anchor="middle" font-size="10" fill="#085041">Config aapki</text>
+<rect x="340" y="30" width="155" height="130" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text x="417" y="55" text-anchor="middle" font-size="13" font-weight="600" fill="#26215C">3. Managed runtime</text>
+<text x="417" y="78" text-anchor="middle" font-size="11" fill="#3C3489">Vendor loop chalata</text>
+<text x="417" y="94" text-anchor="middle" font-size="11" fill="#3C3489">Aap definition dete</text>
+<text x="417" y="120" text-anchor="middle" font-size="10" fill="#3C3489">Definition aapki</text>
+<rect x="505" y="30" width="165" height="130" rx="8" fill="#FFF6DF" stroke="#8A6D1E" stroke-width="0.5"/>
+<text x="587" y="55" text-anchor="middle" font-size="13" font-weight="600" fill="#5C4813">4. Apna process</text>
+<text x="587" y="78" text-anchor="middle" font-size="11" fill="#5C4813">Agent SDK</text>
+<text x="587" y="94" text-anchor="middle" font-size="11" fill="#5C4813">Mode 2 ka ilaka</text>
+<text x="587" y="120" text-anchor="middle" font-size="10" fill="#5C4813">Sab kuch aapka</text>
+<text x="340" y="200" text-anchor="middle" font-size="12" font-weight="600" fill="#333">Qaida: sirf wahi cheez khud rakho jo zaroori ho, jo chahiye nahi</text>
+<text x="340" y="222" text-anchor="middle" font-size="11" fill="#666">Ownership 1 se 4 taraf barhta jata hai</text>
+</svg>
+<p class="diagram-caption">4 Homes: Session, Cloud schedule, Managed runtime, Apna process — ownership barhta jata hai</p>
+</div>
+
+<div class="para-block"><span class="para-label">4 Homes (Ghar):</span><p class="para-text">1) Aapki session — sab kuch aap khud rakhte hain. Yahin banana/prove karna theek hai, depend karna galat. 2) Cloud schedule — config aapki rehti hai, sirf clock kisi aur ke computer par jata hai. 3) Managed runtime — aap agent ki definition dete hain, vendor loop chalata hai. 4) Apna process — harness ek library ban jati hai aapke apne software mein — ye "Mode 2" ka ilaka hai.</p></div>
+
+<h2>Part 2: Headless Ek Pul Hai</h2>
+
+<div class="para-block"><span class="para-label">Concept 3 (Har ghar headless boli bolta hai):</span><p class="para-text">Aapne pehle se ye pul cross kiya hai — eval course mein claude -p aur opencode run use kiya. Koi bhi cheez jo command chala sakti hai, ab aapka agent chala sakti hai — shell script, cron job, CI runner, cloud scheduler. Zaroori qaida: ab koi dekh nahi raha, is liye headless runs ko zor se bolna zaroori hai jab fail hon — khamoshi ka matlab hamesha "success" hona chahiye.</p></div>
+
+<div class="para-block"><span class="para-label">Concept 4 (Home 2 — Cloud schedule, pehla kadam):</span><p class="para-text">Sirf clock badalta hai, config wahi rehti hai. Claude Code: /schedule command se ek Routine banti hai jo Anthropic ke cloud par chalti hai. 3 honest baatein: Routines abhi research preview mein hain, waqt "around" hota hai exact nahi, aur green status ka matlab sirf ye hai ke technical error nahi aaya, task sahi hua ye nahi. Success ki definition: kam se kam ek pura cycle aur 10 successful beats, laptop band, khamoshi ka matlab baseline.</p></div>
+
+<div class="para-block"><span class="para-label">Minimum Unattended Kit (6 zaroori cheezein):</span><p class="para-text">1) Idempotency — dobara chalane se nuksaan na ho. 2) Missed-run detection — agar run hui hi nahi to koi doosri cheez notice kare. 3) Concurrency lock — ek waqt mein ek hi beat chale. 4) Credential discipline — scoped credentials, personal login nahi. 5) Time semantics — timezone, daylight saving pehle se decide. 6) Cost/execution limits — max duration, retries, spend.</p></div>
+
+<h2>Part 3: Managed Runtime</h2>
+
+<div class="para-block"><span class="para-label">Concept 5 (Aap definition bhejte hain, service worker chalata hai):</span><p class="para-text">Managed runtime ek service hai — aap agent describe karte hain (model, prompt, tools, guardrails), service isay operate karti hai. Loop, session state, crash recovery — sab vendor ki taraf. Misaal (Claude Managed Agents) 3 cheezein banati hain: Agent (definition), Environment (walled space), Session (ek jaari kaam). 2 zaroori facts: managed control plane vendor-specific hota hai, aur managed runtime aur SDK alag products hain.</p></div>
+
+<div class="para-block"><span class="para-label">Concept 6 (Kya milta hai, kya dena parta hai, kya lagta hai):</span><p class="para-text">Milta hai: operations ki fikr khatam — sandboxing, session recovery. Infrastructure pager unka. Dena parta hai: Visibility (sirf event log dekhte ho), Custody (data unki infra par execute hota hai), Portability (definition unke format mein hai). Cost: naya bill type — runtime khud metered hota hai (active session ke hisab se, idle free). Jitna loop bhatakta hai, utna paisa lagta hai.</p></div>
+
+<h2>Part 4: Move Karna</h2>
+
+<div class="para-block"><span class="para-label">Concept 7 (Suitcase test — discipline jati hai, mechanics nahi):</span><p class="para-text">Jo suitcase mein jaata hai: Spec (kya karna hai), rubric, golden set aur baselines, ratchet log, maker-checker split, human gate — ye sab decisions hain, software nahi, isi liye jati hain. Jo peeche reh jata hai: Flags, file paths, session state, ek vendor ke API ke liye likha code, cost assumptions. Zaroori sentence: repo asal sach rakhta hai, aur har ghar usi se configure hota hai.</p></div>
+
+<div class="para-block"><span class="para-label">Concept 8 (Trust dobara kamana parta hai, transfer nahi hoti):</span><p class="para-text">Aapka purana 35/36 score us poore system ka measurement tha. Move karne se ye sab badal gaya, is liye score automatically nahi aata. Arrival Protocol (4 steps): 1) Poora golden set naye ghar mein pehla kaam karke chalao. 2) Kaunsi category fail hui pehle dekho, sirf ginti nahi. 3) Bar wahi rakho, phir naya baseline record karo — purana baseline delete nahi hota. 4) Probation — kam se kam 10 successful beats, purana ghar available rakho, ek galti khud plant kar ke alarm test karo.</p></div>
+
+<h2>Part 5: Ghar Chunna</h2>
+
+<div class="diagram-box">
+<svg width="100%" viewBox="0 0 680 320" role="img">
+<title>The four questions diagram</title>
+<desc>Four questions decide the runtime home: who is the user, what must you own, does a person wait, and what does a bad night cost.</desc>
+<defs><marker id="arrowQ" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#0f4c81" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect x="20" y="20" width="300" height="60" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text x="170" y="42" text-anchor="middle" font-size="13" font-weight="600" fill="#2C2C2A">Q1: User kaun hai?</text>
+<text x="170" y="62" text-anchor="middle" font-size="11" fill="#444441">Sirf aap, ya doosre log bhi?</text>
+<rect x="360" y="20" width="300" height="60" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text x="510" y="42" text-anchor="middle" font-size="13" font-weight="600" fill="#2C2C2A">Q2: Kya apna hona chahiye?</text>
+<text x="510" y="62" text-anchor="middle" font-size="11" fill="#444441">Kuch nahi, sirf kaam, ya poora loop?</text>
+<path d="M320 50 L360 50" fill="none" stroke="#0f4c81" stroke-width="1.5" marker-end="url(#arrowQ)"/>
+<path d="M170 80 L170 100 L510 100 L510 120" fill="none" stroke="#0f4c81" stroke-width="1.5" marker-end="url(#arrowQ)"/>
+<rect x="20" y="120" width="300" height="60" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text x="170" y="142" text-anchor="middle" font-size="13" font-weight="600" fill="#2C2C2A">Q3: Insaan wait karta hai?</text>
+<text x="170" y="162" text-anchor="middle" font-size="11" fill="#444441">Background, ya screen par?</text>
+<rect x="360" y="120" width="300" height="60" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text x="510" y="142" text-anchor="middle" font-size="13" font-weight="600" fill="#2C2C2A">Ghar chun liya</text>
+<text x="510" y="162" text-anchor="middle" font-size="11" fill="#444441">Pehle 3 sawal isay decide karte</text>
+<path d="M320 150 L360 150" fill="none" stroke="#0f4c81" stroke-width="1.5" marker-end="url(#arrowQ)"/>
+<path d="M170 180 L170 200 L340 200 L340 220" fill="none" stroke="#0f4c81" stroke-width="1.5" marker-end="url(#arrowQ)"/>
+<rect x="190" y="220" width="300" height="60" rx="8" fill="#FCEEEA" stroke="#B23A24" stroke-width="0.5"/>
+<text x="340" y="242" text-anchor="middle" font-size="13" font-weight="600" fill="#7A2415">Q4: Bura raat kitna mehnga?</text>
+<text x="340" y="262" text-anchor="middle" font-size="11" fill="#5C1C10">Sirf speed limit set karta hai</text>
+</svg>
+<p class="diagram-caption">4 sawal — pehle 3 ghar chunte hain, chautha sirf speed limit set karta hai</p>
+</div>
+
+<div class="para-block"><span class="para-label">Concept 9 (4 Sawal):</span><p class="para-text">Sawal 1: User kaun hai? Sirf aap? To Home 2 kaafi hai. Doosre log bhi hain to loop ko aapke bina bhi chalna chahiye. Sawal 2: Kya zaroor apna hona chahiye? Kuch nahi → managed runtime theek hai. Sirf execution/data → managed + self-hosted sandbox. Control plane bhi → apna runtime (Mode 2). Sawal 3: Kya koi insaan jawab ka wait kar raha hai? Scheduled/background → schedules/managed sessions kaafi. Insaan screen par wait → serving runtime chahiye. Sawal 4: Bura raat kitna mehnga hoga? Kam nuksaan → jaldi move karo. Bara nuksaan → poora suite pass hona chahiye pehle.</p></div>
+
+<div class="para-block"><span class="para-label">Concept 10 (Ek poori misaal, aur ghar mix karna):</span><p class="para-text">Ayesha ki invoicing loop 5 clients ko serve karti hai, ek bank hai jise data khud ke infra par rakhna zaroori hai. Sawal 2 ka jawab: bank ka "must" execution/data plane ke baare mein hai — Home 3 with self-hosted sandbox theek ho sakta hai. Zaroori baat: ek system usually 2-3 ghar mix karta hai — roz ka loop Home 2 mein, bara one-off kaam Home 1 mein interactively. Repo asal sach rakhta hai — yehi cheez mix ko organized rakhti hai.</p></div>
+
+<h2>Part 6: Honest Rehna</h2>
+
+<div class="para-block"><span class="para-label">Concept 11 (Lock-in ek rate hai, aur ownership chupke se ghisti hai):</span><p class="para-text">Lock-in ek waqia nahi, ek rate hai. Koi ek din portability nahi chorta — chhota chhota leak hota hai. Har quarter check karo: "Agar ye ghar gayab ho jaye, isay dobara banane mein kitna kharcha hoga?" Ownership bhi chupke se ghisti hai — jab system mahino chupchap chalta rahe, aap khud check karna band kar dete hain. Fix: calendar reminder lagao, khud check karte raho.</p></div>
+
+<div class="para-block"><span class="para-label">Concept 12 (Ghar kya theek nahi kar sakta):</span><p class="para-text">Behtar ghar sirf kab agent kaam karta hai, kaun usay zinda rakhta hai, aur raat 3 baje kya hota hai — isay change karta hai. Ye ek cheez change nahi karta: agent kitna acha kaam karta hai. Kamzor spec Anthropic ke cloud par bhi kamzor rahega. Poore section ka safar: aapne agent chalana seekha, phir spec se direct karna, phir loop delegate karna, harness sakht karna, checker naapna, aur ab poore system ko ghar dena — ye poori cheez ka naam hai: Digital FTE. Aakhri jumla: loop ne agent ko waqt diya, harness ne limits diye, evals ne track record diya. Ye chapter ne aakhri cheez di: ek address jo aapki nahi hai.</p></div>
+
+<div class="summary-box">
+  <h2 style="margin-top:0; border:none;">End Summary (Aik Nazar Mein)</h2>
+  <ul>
+    <li>Laptop par proven loop ek "bura rakha khazana" hai — machine khud sabse bara single point of failure hai</li>
+    <li>Zaroori sawal: loop kaun operate karta hai, kaam kahan execute hota hai?</li>
+    <li>4 Homes: Aapki session, Cloud schedule, Managed runtime, Apna process</li>
+    <li>Headless har ghar ka pul hai — koi bhi command chala sakti hai to agent kahin bhi chal sakta hai</li>
+    <li>Home 2 (schedule): sirf clock badalta hai — 6 zaroori controls (idempotency, missed-run detection, waghera)</li>
+    <li>Home 3 (managed): definition bhejte ho, vendor operate karta hai — visibility/custody/portability dena parta hai</li>
+    <li>Suitcase test: decisions (spec, rubric, golden set) jati hain, mechanics (flags, paths) nahi jati</li>
+    <li>Move karne ke baad trust dobara kamani parti hai — poora suite chalao, naya baseline banao, probation do</li>
+    <li>4 sawal ghar chunte hain: user kaun, kya apna hona chahiye, kya insaan wait kar raha, bura raat kitna mehnga</li>
+    <li>Lock-in ek rate hai, waqia nahi — repo mein sach rakho taake kabhi bhi nikal sako</li>
+    <li>Ghar sirf "kab aur kaun" change karta hai, "kitna acha" nahi — quality spec/harness/evals se aati hai</li>
+  </ul>
+</div>
+
+<div id="quiz-section">
+  <h2 style="margin-top:50px;">Quiz — 25 Real-World Scenario Questions</h2>
+  <p class="quiz-intro">Ye quiz seedhi seedhi definitions nahi poochta — har sawal ek real-world situation deta hai. Sab 25 sawal attempt karein phir "Quiz Submit Karein" dabayein.</p>
+  <div id="score-banner" class="score-banner" style="display:none;"></div>
+  <div id="quiz-questions"></div>
+  <div class="quiz-actions">
+    <button id="submitQuizBtn" class="btn-primary">Quiz Submit Karein</button>
+    <button id="retakeQuizBtn" class="btn-secondary" style="display:none;">Dobara Quiz Lein</button>
+  </div>
+</div>
+
+<footer>
+  Source: <a href="https://agentfactory.panaversity.org/docs/leaving-the-laptop-crash-course" target="_blank">https://agentfactory.panaversity.org/docs/leaving-the-laptop-crash-course</a>
+</footer>
+
+</div>
+
+<script>
+const quizData = [
+  {
+    q: "Ek developer ka morning-triage loop bilkul acha kaam karta hai, lekin sirf tab jab uska laptop khula ho, session login ho, aur machine subah 9 baje jaagi ho. Chapter is masle ko kya kehta hai?",
+    options: ["Ye normal hai, koi masla nahi", "Loop apni machine se zyada bharosemand hai — machine khud aakhri single point of failure ban gayi hai", "Loop khud kamzor hai", "Ye sirf OpenCode ka masla hai"],
+    correct: 1,
+    explain: "Trilogy ne har single point of failure hata di (maker-checker, harness, evals), sirf ek bacha — khud machine. System ab machine se zyada reliable hai."
+  },
+  {
+    q: "Ek naya runtime option dekhte waqt bohat saari vocabulary aati hai (cloud sessions, hosted agents, SDKs). Ye sab confusion ek sawal se saaf hoti hai. Wo sawal kya hai?",
+    options: ["Kaunsa tool sabse mehnga hai?", "Loop kaun operate karta hai, aur kaam kahan execute hota hai?", "Kaunsa model sabse tez hai?", "Kitne users honge?"],
+    correct: 1,
+    explain: "Ye 2-hisson wala sawal (control plane + execution plane) har option ko 4 homes mein sort kar deta hai."
+  },
+  {
+    q: "Ek company chahti hai ke unka loop sirf clock badle, config wahi rahe, laptop band ho tab bhi chale. Kaunsa home sahi hai?",
+    options: ["Home 1", "Home 2 — cloud schedule", "Home 3", "Home 4"],
+    correct: 1,
+    explain: "Home 2 exactly ye karta hai — config wahi rehti hai, sirf clock kisi aur ke computer par jata hai."
+  },
+  {
+    q: "Ek team apna agent definition ek service ko bhejti hai, aur wo service loop, sessions, aur crash recovery khud sambhalti hai. Ye kaunsa home hai?",
+    options: ["Home 1", "Home 2", "Home 3 — managed runtime", "Home 4"],
+    correct: 2,
+    explain: "Home 3 mein aap sirf definition dete ho, vendor poora control plane operate karta hai."
+  },
+  {
+    q: "Ek eval runner 'claude -p' se agent ko command ki tarah chalata hai, bina koi window khole. Ye kis concept ka example hai?",
+    options: ["Managed runtime", "Headless mode — anything jo command chala sake, ab agent chala sakti hai", "Sandbox", "Lock-in"],
+    correct: 1,
+    explain: "Headless mode har home ka pul hai — koi bhi cheez (script, cron, scheduler) jo command chala sakti hai, ab agent bhi chala sakti hai."
+  },
+  {
+    q: "Ek headless run raat ko fail hota hai lekin koi notice nahi karta, kyun ke exit code kisi ne check nahi kiya. Kaunsi rule tori gayi?",
+    options: ["Idempotency", "Headless runs must fail loudly — khamoshi ka matlab hamesha success hona chahiye", "Concurrency lock", "Portability"],
+    correct: 1,
+    explain: "Concept 3 ka zaroori rule: koi dekh nahi raha, is liye har headless run ko fail hone par zor se bolna zaroori hai."
+  },
+  {
+    q: "Ek Claude Code Routine 'green' status dikhati hai. Kya iska matlab kaam sahi hua?",
+    options: ["Haan, green hamesha success ka matlab hai", "Nahi, green sirf batata hai session infrastructure error ke baghair khatam hua — task sahi hua ye alag baat hai", "Green sirf failure dikhata hai", "Green ka koi matlab nahi"],
+    correct: 1,
+    explain: "Chapter ki 3 honest baatein mein se ek: green status sirf infrastructure success dikhata hai, task success nahi — loud-failure rule khud enforce karni parti hai."
+  },
+  {
+    q: "Ek invoicing loop production mein hai lekin agar retry ho jaye to wahi invoice 2 baar client ko chala jata hai. Kaunsi kit control missing hai?",
+    options: ["Time semantics", "Idempotency — retried beat safe hona chahiye repeat hone ke liye", "Cost limits", "Credential discipline"],
+    correct: 1,
+    explain: "Idempotency: ek dafa hone wala kaam dobara try karne se nuksaan nahi hona chahiye — invoice dobara na jaye."
+  },
+  {
+    q: "Ek loop kabhi chali hi nahi (server down tha), lekin kisi ko pata nahi chala kyun ke koi bhi cheez isay track nahi kar rahi thi. Kaunsi kit control missing hai?",
+    options: ["Missed-run detection — ek doosra system notice kare jab pehla kabhi shuru hi na hua ho", "Idempotency", "Concurrency lock", "Time semantics"],
+    correct: 0,
+    explain: "Missed-run detection zaroori hai — jo process kabhi chali hi nahi, wo apni absence khud report nahi kar sakti, koi doosra system dekh raha hona chahiye."
+  },
+  {
+    q: "Ek company apna agent definition ek managed service ko deti hai. Kya wahi definition ka code seedha Agent SDK par bhi deploy ho jayega?",
+    options: ["Haan, dono same hain", "Nahi — managed runtime aur SDK alag products hain, ek ke liye likha code doosre par kaam nahi karta", "Haan, agar model same ho", "SDK sirf OpenCode ke liye hai"],
+    correct: 1,
+    explain: "Concept 5 clearly kehta hai: Agent SDK aur Managed Agents alag products hain, code portable nahi hota unke beech."
+  },
+  {
+    q: "Ek team managed runtime use karti hai. Ab wo agent ke andar kya ho raha hai kaise dekh sakti hai?",
+    options: ["Machine khud dekh sakte hain", "Sirf event log jo service emit karti hai — machine khud nahi", "Kuch bhi nahi dikhta", "Har cheez pehle jaisi dikhti hai"],
+    correct: 1,
+    explain: "Concept 6 ka 'Visibility' trade-off: aap event log parhte ho, machine khud nahi — depth-3 trace grading isi log par depend karti hai."
+  },
+  {
+    q: "Ek loop bohat 'bhatakta' hai — bar bar retry karta hai, lambi sochta hai. Home 3 mein isse kya farak parega jo home 1/2 mein nahi parta tha?",
+    options: ["Kuch farak nahi", "Runtime khud metered hota hai — jitna zyada loop bhatakta hai, utna paisa lagta hai, na sirf waqt", "Loop free ho jata hai", "Sirf tokens ki cost hoti hai"],
+    correct: 1,
+    explain: "Home 3 mein active runtime ke liye alag se meter chalta hai — bhatakne wala loop ab paisa bhi zaya karta hai, sirf waqt nahi."
+  },
+  {
+    q: "Ek company apna rubric, golden set, aur baselines nayi jagah move karti hai. Kya ye cheezein 'suitcase' mein hain ya 'fixtures' mein?",
+    options: ["Fixtures mein, kyun ke ye technical files hain", "Suitcase mein — ye decisions hain (spec, rubric, cases), software nahi, isi liye jati hain", "Kahin nahi, dono home mein alag rakhni parti hain", "Sirf golden set jata hai, baseline nahi"],
+    correct: 1,
+    explain: "Suitcase test: decisions (spec, rubric, golden set, ratchet log, maker-checker, human gate) travel karte hain — mechanics (flags, paths) nahi."
+  },
+  {
+    q: "Ek fixture file mein ek absolute laptop path hai (jaise C:/Users/Ayesha/file.txt). Nayi jagah move karne par ye kaise masla banega?",
+    options: ["Koi masla nahi, path automatically theek ho jayega", "Ye mechanics hai jo galti se suitcase mein aa gayi — nayi jagah fail hogi, fix karna hoga path ko relative banana", "Ye ek suitcase item hai, waisa hi rehna chahiye", "Sirf managed runtime mein masla hoga"],
+    correct: 1,
+    explain: "Absolute path mechanics hai, discipline nahi — accidentally suitcase mein travel kar gayi. Fix: case ko repair karo (relative path), phir re-baseline karo."
+  },
+  {
+    q: "Ek team ne apni cloud ko move kar diya. Purana score 35/36 tha. Kya wo score naye ghar mein automatically inherit hoga?",
+    options: ["Haan, score hamesha carry hota hai", "Nahi — purana score us purane system ka tha (old config, old machine), naye ghar mein trust dobara kamani parti hai", "Haan, lekin sirf agar model same ho", "Score kabhi kaam nahi karta"],
+    correct: 1,
+    explain: "Concept 8: purana number ek pura system measure karta tha jo ab exist nahi karta — comparison target rehta hai, lekin trust dobara re-earn hoti hai."
+  },
+  {
+    q: "Nayi ghar mein pehla eval run 33/36 aaya, purana baseline 35/36 tha. Sahi arrival protocol kya hai?",
+    options: ["Foran wapas purani ghar mein chale jao", "Poora golden set chalao, misses ko category se dekho (ginti se nahi), bar wahi rakho, phir naya baseline record karo", "Sirf overall number dekho, kaafi hai", "Purana baseline delete kar do"],
+    correct: 1,
+    explain: "Arrival protocol: full set chalao, category-wise misses dekho, bar wahi rakho (change nahi), phir runtime-labeled naya baseline banao — purana comparison ke liye rehta hai."
+  },
+  {
+    q: "Ek naye ghar mein 10 successful beats ho gaye hain, do hafte se green hai. Team kehti hai 'move complete hai'. Kya missing ho sakta hai?",
+    options: ["Kuch nahi missing, move complete hai", "Alarm test nahi hua — jab tak ek deliberate failure plant kar ke dekha na jaye ke alarm pohanchta hai, khamoshi ambiguous hai", "10 beats bohat kam hain", "Naye baseline ki zaroorat nahi"],
+    correct: 1,
+    explain: "Probation mein ek deliberate failure plant karna zaroori hai — warna khamoshi ka matlab 'baseline' bhi ho sakta hai, ya 'runner kabhi chala hi nahi' bhi."
+  },
+  {
+    q: "Sawal 1 (User kaun hai?) ka jawab 'sirf main' hai. Sabse zyada likely home kaunsa hoga?",
+    options: ["Home 4 — apna khud process banana chahiye", "Home 2 — cloud schedule aksar kaafi hota hai", "Home 3 — hamesha managed runtime chahiye", "Koi bhi ghar theek nahi"],
+    correct: 1,
+    explain: "Chapter kehta hai: agar user sirf aap ho, home 2 almost hamesha kaafi hota hai — zyada mehnga home ki zaroorat nahi."
+  },
+  {
+    q: "Ek bank ka rule hai: client ka data unke apne infrastructure par hi rehna chahiye, lekin operations ka jhanjhat vendor sambhale to bhi theek hai. Sawal 2 ke mutabiq kaunsa answer sahi hai?",
+    options: ["'Kuch nahi apna' — poora managed le lo", "'Sirf execution/data plane apna' — managed runtime with self-hosted sandbox", "'Control plane bhi apna' — hamesha khud runtime banao", "Ye sawal bank ke case mein apply nahi hota"],
+    correct: 1,
+    explain: "Jab must sirf data/execution ke baare mein ho, managed control plane + self-hosted sandbox exactly wo combination deta hai jo chahiye."
+  },
+  {
+    q: "Ek loop scheduled hai aur koi insaan uska jawab screen par wait nahi karta. Sawal 3 ke mutabiq is loop ko kaunsi additional requirement chahiye?",
+    options: ["Serving runtime zaroori hai", "Koi extra requirement nahi — background/scheduled work schedules aur managed sessions mein comfortably fit hota hai", "Hamesha home 4 chahiye", "Insaan ko hamesha wait karna chahiye"],
+    correct: 1,
+    explain: "Sawal 3 sirf tab masla banata hai jab koi insaan real-time screen par wait kar raha ho — background/scheduled kaam ke liye normal homes kaafi hain."
+  },
+  {
+    q: "Ek loop ki bad night sirf ek galat internal label file karti hai — koi bara nuksaan nahi. Sawal 4 ke mutabiq kya karna chahiye?",
+    options: ["Poora suite pass hona chahiye unattended shift se pehle", "Kam blast radius hai — kit pass karo, jaldi move karo, baaki probation ke dauran harden karo", "Aisa loop kabhi unattended nahi chalana chahiye", "Sawal 4 is case mein relevant nahi"],
+    correct: 1,
+    explain: "Low blast radius loops ke liye speed limit dheeli hoti hai — kit pass ho to jaldi move kar sakte hain, baaki probation mein sudhar sakte hain."
+  },
+  {
+    q: "Ek real system mein daily loop Home 2 mein chalta hai, aur ek bara quarterly refactor task Home 1 mein interactively hota hai. Kya ye 2 alag homes use karna galat hai?",
+    options: ["Haan, hamesha ek hi home use karna chahiye", "Nahi — ek healthy system usually 2-3 homes mix karta hai, har loop apna alag jawab rakh sakta hai", "Sirf ek loop ke liye 2 homes allowed hain", "Ye sirf Ayesha ke case mein sahi hai"],
+    correct: 1,
+    explain: "Concept 10: home ek permanent commitment nahi, har loop ke liye per-loop decision hai — healthy systems mix karte hain."
+  },
+  {
+    q: "Ek team ke pass ek rule hai jo sirf ek vendor-side setting mein tweak kar diya gaya, repo mein mirror nahi kiya gaya. Ye kya kehlata hai?",
+    options: ["Ownership drift", "Lock-in ka leak — ek item chupke se suitcase se fixtures ki taraf move ho gaya", "Headless failure", "Concurrency masla"],
+    correct: 1,
+    explain: "Lock-in ek rate hai — har baar jab koi rule sirf vendor-side setting mein hota hai, repo mein nahi, ye ek item hai jo suitcase se bahar leak ho gaya."
+  },
+  {
+    q: "Ek team ka system mahino se chup chaap chal raha hai, koi bhi ab category-wise report nahi parhta, calibration dobara nahi karta. Ye kya kehlata hai?",
+    options: ["Lock-in", "Ownership drift — 'system measured hai' se 'system fine hai' ban gaya, bina file badle", "Idempotency failure", "Headless bridge"],
+    correct: 1,
+    explain: "Ownership drift human masla hai — quiet system aapko check karna band kara deta hai, jabke discipline ka koi step khud-check karne wala nahi hota."
+  },
+  {
+    q: "Ek reader kehta hai 'behtar runtime lagane se hamara AI zyada smart/behtar ho jayega'. Kya ye sahi hai?",
+    options: ["Haan, managed runtime agent ko smarter banata hai", "Nahi — ghar sirf kab/kaun operate karta hai badalta hai, agent kitna acha kaam karta hai wo spec/harness/evals se aata hai", "Haan, lekin sirf home 3 ke liye", "Runtime hi sab kuch decide karta hai"],
+    correct: 1,
+    explain: "Concept 12 ka zaroori boundary: ghar quality nahi badalta — kamzor spec Anthropic ke cloud par bhi kamzor rahega."
+  }
+];
+
+let userAnswers = new Array(quizData.length).fill(null);
+
+function renderQuiz() {
+  const container = document.getElementById('quiz-questions');
+  container.innerHTML = '';
+  quizData.forEach((item, idx) => {
+    const qDiv = document.createElement('div');
+    qDiv.className = 'quiz-question';
+    qDiv.id = 'q-block-' + idx;
+    let optionsHtml = '';
+    item.options.forEach((opt, oIdx) => {
+      optionsHtml += `
+        <label class="quiz-option" id="opt-${idx}-${oIdx}">
+          <input type="radio" name="q${idx}" value="${oIdx}" onchange="selectAnswer(${idx}, ${oIdx})">
+          <span>${opt}</span>
+        </label>`;
+    });
+    qDiv.innerHTML = `
+      <p class="quiz-q-text"><strong>Sawal ${idx + 1}:</strong> ${item.q}</p>
+      <div class="quiz-options">${optionsHtml}</div>
+      <p class="quiz-explain" id="explain-${idx}" style="display:none;"></p>
+    `;
+    container.appendChild(qDiv);
+  });
+}
+
+function selectAnswer(qIdx, oIdx) {
+  userAnswers[qIdx] = oIdx;
+}
+
+function submitQuiz() {
+  let score = 0;
+  let unanswered = 0;
+  quizData.forEach((item, idx) => {
+    const selected = userAnswers[idx];
+    if (selected === null) unanswered++;
+    for (let o = 0; o < item.options.length; o++) {
+      const label = document.getElementById(`opt-${idx}-${o}`);
+      label.querySelector('input').disabled = true;
+      if (o === item.correct) {
+        label.classList.add('correct-answer');
+      } else if (o === selected && selected !== item.correct) {
+        label.classList.add('wrong-answer');
+      }
+    }
+    if (selected === item.correct) score++;
+    const explainEl = document.getElementById(`explain-${idx}`);
+    explainEl.textContent = 'Wazahat: ' + item.explain;
+    explainEl.style.display = 'block';
+  });
+
+  const percent = Math.round((score / quizData.length) * 100);
+  const banner = document.getElementById('score-banner');
+  banner.style.display = 'block';
+  let msg = `Aapka Score: ${score} / ${quizData.length} (${percent}%)`;
+  if (unanswered > 0) msg += ` — ${unanswered} sawal chhoray gaye the.`;
+  if (percent >= 70) {
+    banner.className = 'score-banner pass';
+    msg += ' — Mubarak ho, aap graduate hone ke qabil hain! 🎉';
+  } else {
+    banner.className = 'score-banner fail';
+    msg += ' — 70% se kam hai, chapter dobara review karein.';
+  }
+  banner.textContent = msg;
+  banner.scrollIntoView({behavior:'smooth', block:'start'});
+
+  document.getElementById('submitQuizBtn').style.display = 'none';
+  document.getElementById('retakeQuizBtn').style.display = 'inline-block';
+}
+
+function retakeQuiz() {
+  userAnswers = new Array(quizData.length).fill(null);
+  document.getElementById('score-banner').style.display = 'none';
+  document.getElementById('submitQuizBtn').style.display = 'inline-block';
+  document.getElementById('retakeQuizBtn').style.display = 'none';
+  renderQuiz();
+  document.getElementById('quiz-section').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+document.getElementById('submitQuizBtn').addEventListener('click', submitQuiz);
+document.getElementById('retakeQuizBtn').addEventListener('click', retakeQuiz);
+renderQuiz();
+</script>
+
+</body>
+</html>
